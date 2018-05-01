@@ -1,0 +1,2 @@
+
+This is the memory game that was created thanks to the support of mentors from Udacity as a part of Google Front-End Developer Challenge. Feel free to evolve the project as you wish. I'm gonna make it more attractive by adding some animations :) Have fun!
