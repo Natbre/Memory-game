@@ -105,15 +105,25 @@ html {
      100% {
          transform: translate(1px, -2px) rotate(-1deg);
     }
-}undefined}undefined/* * Styles for the Score Panel */undefined .score-panel {
- text-align: left;
- width: 345px;
- margin-bottom: 10px;undefined}undefined .score-panel .starsFirst .starsSecond .starsThird {
- padding: 100;
- display: inline-block;
- margin: 0 5px 0 0;undefined}undefined .score-panel .starss li {
- list-style: none;
- display: inline-block;undefined}undefined .score-panel .restart {
- float: right;
- cursor: pointer;
- margin-left: 90px;undefined}undefined 
+}
+/* * Styles for the Score Panel */
+ .score-panel {
+     text-align: left;
+     width: 345px;
+     margin-bottom: 10px;
+}
+ .score-panel .starsFirst .starsSecond .starsThird {
+     margin: 0;
+     padding: 0;
+     display: inline-block;
+     margin: 0 5px 0 0;
+}
+ .score-panel .starss li {
+     list-style: none;
+     display: inline-block;
+}
+ .score-panel .restart {
+     float: right;
+     cursor: pointer;
+}
+ 
