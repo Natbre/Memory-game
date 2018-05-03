@@ -5,6 +5,41 @@ let pair = 0;
 var minutesLabel = document.getElementById("minutes");
 var secondsLabel = document.getElementById("seconds");
 var setInt = "";
+let clicked = 0;
+
+//restarting the game
+
+function restart() {
+    for (let k = 0; k < cardsList.length; k++) {
+        let el = document.getElementsByClassName('card');
+        el[k].setAttribute("class", "card");
+        let moves = document.querySelector('span');
+        moves.textContent = 0;
+        click = 0;
+        let starFirst = document.querySelector('li.starsFirst>i');
+        starFirst.setAttribute("class", "fa fa-star");
+        let starSecond = document.querySelector('li.starsSecond>i');
+        starSecond.setAttribute("class", "fa fa-star");
+        clearInterval(setInt);
+        totalSeconds = 0;
+        secondsLabel.innerHTML = "00";
+        minutesLabel.innerHTML = "00";
+        win = 0;
+        shuffle(cardsList);
+        cardsList.forEach(function(item, index) {
+            let shuffleCard = document.querySelectorAll('li.card>i');
+            shuffleCard[index].setAttribute("class", item);
+
+        });
+
+    }
+
+}
+document.querySelector('div.restart').addEventListener('click', function() {
+
+    restart();
+})
+
 
 function clockStarts() {
         var totalSeconds = 0;
@@ -62,85 +97,97 @@ function showOpen(index) {
     const el = document.getElementsByClassName('card');
     for (let i = 0; i < cardsList.length; i++) {
         el[i].addEventListener('click', function(e) {
-            $(this).toggleClass("open show");
-
+            e.preventDefault();
             //Counting the clicks
-            click++;
-            //Starting the clock
-            if (click === 1) {
-                clockStarts();
-            }
-            let moves = document.querySelector('span');
-            moves.textContent = parseInt(click);
-            let cardClass = el[i].querySelector('li>i');
 
 
-            let previous = cardClass.className;
-            //Reducing stars after certain number of clicks
-            function noFirstStar() {
+            if (el[i].className === 'card') {
+                clicked++;
 
-                if (click > 25) {
-                    let star = document.querySelector('li.starsFirst>i');
-                    star.setAttribute("class", "star");
-                    starCount = 2;
-                }
-            }
-            noFirstStar();
+                $(this).toggleClass("open show");
 
-            function noSecondStar() {
 
-                if (click > 35) {
-                    let star = document.querySelector('li.starsSecond>i');
-                    star.setAttribute("class", "star");
-                    starCount = 1;
-                }
-            }
-            noSecondStar();
+                click++;
 
-            function noThirdStar() {
 
-                if (click > 45) {
-                    let star = document.querySelector('li.starsThird>i');
-                    star.setAttribute("class", "star");
-                    starCount = 0;
+                //Starting the clock
+                if (click === 1) {
+                    clockStarts();
 
                 }
-            }
-            noThirdStar();
-            //Matching the cards
-            function explode() {
-
-                if (click % 2 === 0) {
-                    for (let j = 0; j < cardsList.length; j++) {
-                        if (currentClass === previous && el[j].className === 'card open show') {
-                            el[j].setAttribute("class", "card match");
-                            pair = 1;
+                let moves = document.querySelector('span');
+                moves.textContent = parseInt(clicked);
+                let cardClass = el[i].querySelector('li>i');
 
 
-                        } else {
-                            function closeCards() {
-                                if (el[j].className === 'card open show') {
-                                    el[j].setAttribute("class", "card");
-                                    pair = 0;
+                let previous = cardClass.className;
+
+                //Reducing stars after certain number of clicks
+                function noFirstStar() {
+
+                    if (click > 25) {
+                        let star = document.querySelector('li.starsFirst>i');
+                        star.setAttribute("class", "star");
+                        starCount = 2;
+                    }
+                }
+                noFirstStar();
+
+                function noSecondStar() {
+
+                    if (click > 35) {
+                        let star = document.querySelector('li.starsSecond>i');
+                        star.setAttribute("class", "star");
+                        starCount = 1;
+                    }
+                }
+                noSecondStar();
+                //Matching the cards
+                function explode() {
+
+                    if (click % 2 === 0) {
+                        //                const el = document.getElementsByClassName('card');
+                        for (let p = 0; p < cardsList.length; p++) {
+                            if (el[p].className !== 'card matched') {
+
+                                // for (let j = 0; j < cardsList.length; j++) {
+                                if (currentClass === previous && el[p].className === 'card open show') {
+                                    el[p].setAttribute("class", "card match shake-slow");
+                                    pair = 1;
+
+
+                                } else {
+                                    function closeCards() {
+                                        if (el[p].className === 'card open show') {
+                                            el[p].setAttribute("class", "card");
+                                            pair = 0;
+                                        }
+                                    }
+                                    setTimeout(closeCards, 200);
+                                    //}
                                 }
                             }
-                            setTimeout(closeCards, 200);
-
                         }
                     }
                 }
+                explode();
+                currentClass = previous;
+                win = win + pair;
+                pair = 0;
             }
-            explode();
-
-            currentClass = previous;
-            win = win + pair;
-            pair = 0;
             //The pop up informing the the game is won
             function winner() {
 
                 if (win === 8) {
                     clearInterval(setInt);
-                    alert("Congratulations!!! You won!!! Your time is " + minutesLabel.innerHTML + " min " + secondsLabel.innerHTML + " s. " + "You have " + starCount + " stars left." + " Do you want to start over?");
+                    swal({
+                        title: "Congratulations!!! You won!!!",
+                        text: " Your time is " + minutesLabel.innerHTML + " min " + secondsLabel.innerHTML + " s.\n " + "You have " + starCount + " stars left.\n" + " Do you want to start over?",
+                        icon: "success",
+                        button: {
+                            text: "Aww yiss!",
+                        }
+                    });
                 }
             }
             setTimeout(winner, 50);
@@ -155,8 +202,13 @@ function showOpen(index) {
 showOpen();
 
 
+// function handler(e) {
+//     // remove this handler
+//     e.target.removeEventListener(e.type, arguments.callee);
+// }
 //restarting the game
-document.querySelector('div.restart').addEventListener('click', function() {
+
+function restart() {
     for (let k = 0; k < cardsList.length; k++) {
         let el = document.getElementsByClassName('card');
         el[k].setAttribute("class", "card");
@@ -167,14 +219,22 @@ document.querySelector('div.restart').addEventListener('click', function() {
         starFirst.setAttribute("class", "fa fa-star");
         let starSecond = document.querySelector('li.starsSecond>i');
         starSecond.setAttribute("class", "fa fa-star");
-        let starThird = document.querySelector('li.starsThird>i');
-        starThird.setAttribute("class", "fa fa-star");
         clearInterval(setInt);
         totalSeconds = 0;
         secondsLabel.innerHTML = "00";
         minutesLabel.innerHTML = "00";
         win = 0;
+        shuffle(cardsList);
+        cardsList.forEach(function(item, index) {
+            let shuffleCard = document.querySelectorAll('li.card>i');
+            shuffleCard[index].setAttribute("class", item);
+
+        });
 
     }
 
+}
+document.querySelector('div.restart').addEventListener('click', function() {
+
+    restart();
 })
