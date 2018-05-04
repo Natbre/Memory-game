@@ -5,11 +5,11 @@ This is the memory game that was created thanks to the support of mentors from U
 
 ## **Installation**
 
-You can dwonload it from _git hub account_.[GitHub](https://github.com/Natbre/Memory-game) :thumbsup: :clap:
+You can dwonload it from [GitHub](https://github.com/Natbre/Memory-game) 
 
 ## **How to play**
 
-Once you open the page you'll see 16 black squares. Just click on one of them! Do you see an image? That's perfect. Now try the other one. If they match each other they stay open for and you'll need to find another pair. Just click on the cards untill you pairall of them. There are 3 stars above the number of moves. If you find the cards really quickly then you'll win with 3 stars on your account. But be careful - the more moves you make the more stars you'll lose. There is also a timer that starts once you click on the first card, try to win ad fast as it is possible! Have fun! :smiley face:
+Once you open the page you'll see 16 black squares. Just click on one of them! Do you see an image? That's perfect. Now try the other one. If they match each other they stay open for and you'll need to find another pair. Just click on the cards untill you pairall of them. There are 3 stars above the number of moves. If you find the cards really quickly then you'll win with 3 stars on your account. But be careful - the more moves you make the more stars you'll lose. There is also a timer that starts once you click on the first card, try to win ad fast as it is possible! Have fun! :thumbsup: :clap:
 
 ## **External sources**
 
