@@ -154,6 +154,7 @@ function showOpen(index) {
                                 if (currentClass === previous && el[p].className === 'card open show') {
                                     el[p].setAttribute("class", "card match shake-slow");
                                     pair = 1;
+                                    click = click+1;
 
 
                                 } else {
@@ -186,8 +187,11 @@ function showOpen(index) {
                         icon: "success",
                         button: {
                             text: "Aww yiss!",
+                            
+
                         }
                     });
+                    setTimeout(restart, 500);
                 }
             }
             setTimeout(winner, 50);
