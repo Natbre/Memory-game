@@ -21,3 +21,5 @@ Once you open the page you'll see 16 black squares. Just click on one of them! D
 ## **Contributions**
 
 Please feel free to develop this project any way you wish :) Have fun!
+
+# This is an <h1> tag
